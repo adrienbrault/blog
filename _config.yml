@@ -111,6 +111,7 @@ prose:
     "source/_posts": |
       layout: post
       title: "Title"
+      date: CURRENT_DATETIME
       comments: true
       categories:
       published: true
