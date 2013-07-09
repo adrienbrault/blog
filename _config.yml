@@ -114,3 +114,6 @@ prose:
       comments: true
       categories:
       published: true
+
+github_edit_post:
+  repository: "adrienbrault/blog"
