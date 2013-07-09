@@ -16,4 +16,4 @@ after_script:
 env:
     global:
         - GH_REPO="adrienbrault/blog"
-        - secure: "gt9rOVKPV8NTIpFPGmkXg/z/M7byInvamOLz4IG2Fiwr8nuf/Q9G67l4ATqN\nlLlxCz/KwwLq7+Nal6TB5DFm04S+eo/HeYb85ErYMbjIFbj0XlIxZBefxTHd\nuvP4lhnGMTdfOfO/NyD4XnnlxdrWaHsDTrdA1Hs1qP6GpoxY+P8="
+        - secure: "F9PYe4izbLlOT5EOg8UFycU7dplQcR144N6z67Za3hmYgfJAs342N+eQYQue\noZszrSX6dvHllyBpt8FONLlUbE4erAYX6rWB2gp7o4Lr2zplZaJeKln5Yyzs\ngihw5T1uxEnnHnnCwcGUU9IokJGhDk6C2bIgrdupPdKPZ+KWvtQ="
