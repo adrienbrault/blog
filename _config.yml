@@ -103,3 +103,14 @@ stackoverflow_user: AdrienBrault
 stackoverflow_user_id: 658474
 
 linkedin_user: adrien-brault/26/874/4b9
+
+#prose.io settings
+prose:
+  rooturl: "source"
+  metadata:
+    "source/_posts": |
+      layout: post
+      title: "Title"
+      comments: true
+      categories:
+      published: true 
