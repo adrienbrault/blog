@@ -3,7 +3,7 @@
 # ----------------------- #
 
 url: http://adrienbrault.net
-title: Adrien Brault Blog
+title: Adrien Brault
 subtitle: Software Developer
 author: Adrien Brault
 simple_search: http://google.com/search
@@ -90,7 +90,7 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
+disqus_short_name: adrienbrault
 disqus_show_comment_count: false
 
 # Google Analytics
@@ -113,4 +113,4 @@ prose:
       title: "Title"
       comments: true
       categories:
-      published: true 
+      published: true
