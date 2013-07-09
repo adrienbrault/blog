@@ -11,11 +11,10 @@
 	{% endif %}
 	<a class="addthis_counter addthis_pill_style"></a>
 
-    {% if index %}
-    <a href="{{ post | github_edit_post }}">Fork and edit this page</a>
-    {% else %}
-    <a href="{{ page | github_edit_post }}">Fork and edit this page</a>
-    {% endif %}
+    <a href="{% if index %}{{ post | github_edit_post }}{% else %}{{ page | github_edit_post }}{% endif %}"
+        style="margin-left: 20px;">
+        Fork and edit this page
+    </a>
 	</div>
   <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid={{ site.addthis_profile_id }}"></script>
 </div>
