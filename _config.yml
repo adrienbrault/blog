@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://adrienbrault.github.io/blog
+url: http://adrienbrault.net
 title: Adrien Brault Blog
 subtitle: Software Developer
 author: Adrien Brault
@@ -16,7 +16,7 @@ description: Some description
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /blog/atom.xml
+#subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
 email: adrien.brault@gmail.com
@@ -27,7 +27,7 @@ email: adrien.brault@gmail.com
 
 # If publishing to a subdirectory as in http://site.com/project set 'root: /project'
 root: /
-permalink: /blog/:year/:month/:day/:title/
+permalink: /:year/:title/
 source: source
 destination: public
 plugins: plugins
@@ -63,13 +63,13 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 
 # Github repositories
-github_user:
+github_user: AdrienBrault
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: AdrienBrault
 twitter_tweet_button: true
 
 # Google +1
@@ -98,3 +98,8 @@ google_analytics_tracking_id:
 
 # Facebook Like
 facebook_like: false
+
+stackoverflow_user: AdrienBrault
+stackoverflow_user_id: 658474
+
+linkedin_user: adrien-brault/26/874/4b9
