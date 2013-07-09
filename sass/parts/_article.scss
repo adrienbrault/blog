@@ -138,4 +138,8 @@ article{
 .share{
 	padding: 15px 0;
 	@include border-shadow();
+
+    .fork-edit {
+        margin-left: 20px;
+    }
 }
