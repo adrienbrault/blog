@@ -10,5 +10,6 @@ source.old
 source/_stash
 source/stylesheets/screen.css
 source/images/emoji
+!_deploy/images/emoji
 vendor
 node_modules
