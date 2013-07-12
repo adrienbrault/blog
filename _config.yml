@@ -118,3 +118,5 @@ prose:
 
 github_edit_post:
   repository: "adrienbrault/blog"
+
+emoji_dir: /images/emoji
