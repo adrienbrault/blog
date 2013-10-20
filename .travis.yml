@@ -34,9 +34,8 @@ script:
     - rake generate
 after_script:
     - travis-senv decrypt > id_rsa_deploy
-    - ssh-add -D
-    - chmod 600 id_rsa_deploy
-    - ssh-add ./id_rsa_deploy
+    - mv id_rsa_deploy ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
 
     - rake deploy
 env:
