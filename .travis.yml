@@ -1,3 +1,4 @@
+---
 branches:
     only:
         - master
@@ -7,13 +8,59 @@ rvm:
 before_script:
     - git config --global user.email "adrien.brault@gmail.com"
     - git config --global user.name "Adrien Brault"
-    - export REPO_URL="https://$GH_TOKEN@github.com/$GH_REPO.git"
-    - rake setup_github_pages[$REPO_URL]
+
+    - cd _deploy
+    - git init
+    - echo 'Initial Commit' > index.html
+    - git add .
+    - git commit -m "Octopress init"
+    - git remote add adrienbrault.net git@adrienbrault.net:blog
+    - cd ..
+install:
+    - echo "yes" | sudo add-apt-repository ppa:avsm/ppa-testing
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq ocaml ocaml-native-compilers camlp4-extra opam
+    - export OPAMYES=1
+    - opam init
+    - opam install travis-senv
+    - eval `opam config env`
 script:
     - rake generate
 after_script:
+    - travis-senv decrypt > id_rsa_deploy
+    - ssh-add -D
+    - chmod 600 id_rsa_deploy
+    - ssh-add ./id_rsa_deploy
+
     - rake deploy
 env:
-    global:
-        - GH_REPO="adrienbrault/blog"
-        - secure: "F9PYe4izbLlOT5EOg8UFycU7dplQcR144N6z67Za3hmYgfJAs342N+eQYQue\noZszrSX6dvHllyBpt8FONLlUbE4erAYX6rWB2gp7o4Lr2zplZaJeKln5Yyzs\ngihw5T1uxEnnHnnCwcGUU9IokJGhDk6C2bIgrdupPdKPZ+KWvtQ="
+  global:
+  - secure: ! 'O3qPDCJ+1X2dntjyVt71CSXUXZNbPBlLvn+fn7TT1Ig60s5XUYumUBHm+cRbWyQuso3e7i+9GOQvl7LZ7XC11Hr2JIj1mNzI25aFDB//ooihKVhN1pWHWXIdd9ZQrrXTAHML3Xa701Ban04FcbxvcZxI7x+KyRQ6SHlEHkSNCOk='
+  - secure: ! 'COSLlpCw8jSyZr4bNW+2bbSpJWoIMbJXqxAP5NbGCHWWt8jVMql4/TgDfXdILn7TLZ++2w2k7bwkV4yRn3jdHei+UMuXEls3dwPJB5c3b0oucRm/Aet4gWAVsvNio2Kyx03iJXsGmwswcSmiF02K6iMg1sruQcd9+zC4txvLed0='
+  - secure: ! 'jCAPVHykTntEvF/58QseupdoE2o1NnNyX71v7vW6d7y2OtQUdWKhF6VtG26l3ED15QKh6kmwXflUGKqrzjamtk/YZsadbo6r0GjDjc38eC/je8+TMSHC2bKXvhKkgk+8yvKRawsOmxA2hMye+cEz4XC9eRXXT+vyHayRoDvAOfg='
+  - secure: ! 'KGxbHqvfvpmoi1W9+3OoDuGXT0bi/Tbe+9msnauycQMCwK3QcngvWE79r9HszCOYoKCyXh0N0ZTPcsGgvtOjHGecnO8oCQTf0UHfTKrqq67CS5N2+TWeQNYVqcE+jUCtXLA+MbC7Jf/rGzO2hEj6L9CpCLIYUXYOILqGR7loziU='
+  - secure: ! 'DJV/iOuwNRV1WUvRVLBFyCqnxAMbl2+Rh+1unAL6bbSyr+9z9bJqgKZtw7iUi9dyhBu+csP5C4AkQEQzJJVv5d0D6AvPTnELh/fvl1r21Lc6WdQKAmSPxN9+mvs+kQ7hXjpmOtvr+kDxV2M3vq7+Hh+Qfo+DgP+9KYi2ZgHUSEg='
+  - secure: ! 'LK9cPw65JwzELE/k+SdwenNhih7CUki66YSrG+HH+lIKX/v5Kre1k4Z00gOTRrY9tFnMjKMEVtMXH2U+qLGUE9z+utI1aOoJ0+BOq3Ueb/a0puZYTTk/ie2W7lNDis7QgXE9GCfvsItjpYDPNE7iNAugmI0yE97akmSwPte8Vec='
+  - secure: ! 'bZiI4QkSrL8E10yui7IUKZ/dbmkYAtBpgjxbsBIE41EsB8LTiSg/01ScY1UPu2FCRcWz+iAtPKp7Wzbg9oTWEzo5+PG746Tjb0xThvdD7z1e1BDjGWSo1ESuYfMZDFbUDdENlENrJlbxO+3oRLC5Q55u6B6yAyHFQn2fT4Ken8o='
+  - secure: ! 'BcEQIK5EosSlg8QnqcX5UdkzGdxwoSoTgI+/A8bIddkc5ZceyMKEzwoq9mLQQ7WJM9BNs/qIRFcq3RFR1z7kMuYtOnqzDLc6bWLghC8TqlfgTDo1LBgNfaLp1WyLB1AiTJ/OY2Pf2hxtR8S2hI3/LOnFxPIalE7EX9663b5+ydM='
+  - secure: ! 'D/3RSvVmlPA7lHKLg2Licu/hmbzA0EMxzk8Ds/gMW62EtZAVxOyN/qPGQGjRFTYi1I2LnwBJRmbnqnBRbhZEwDLNf3EKv9IP7gTp6lJxtCLK18ezeg3Fabx1VXzkgTLXzNFoG6nO3TBVk28LEWt2O4acnOhWBbg5RaX3NSEELWY='
+  - secure: ! 'I8K9dQ9KiRndYNl3bCXINoKDCqp+dzwjrC1dYZvmGrNiNMeo6THxlo1oU3v6UoI4XGoXNFNX0IB/H6WH8xR2xmBxRVKnMau+ARXrJ5LaK7QXWivA+JvamG5tNYt0Q0kWizNgkEmH6iDCa3Oe6cxnCNIiWlqPkodu4VYIudHZs3I='
+  - secure: ! 'e7WriInIzACjeaQ/9WNwuZblkCZR+jiL2CW2FQztdHJa0rCUnQvXCYVP/Kf2rxYSxQ3GE05nnnW+aqOnuTF0VxYUDPBm/lDd1k/Nd2QVgb7d79n3FwNCm//F1QFsKaJWAXcwuDX7Oe3MeVqVBMRGIz7TfPneJnPdgWDHoA4T8Qk='
+  - secure: ! 'RyS+g4q1L15++7JW6LwkrjFGBB27naWbb5KaNod2eAU9wFN0X+y3cpjUqInsLFPrpSDUtwEXcl11a4EwJQ6cgX4qU175nAbYXxFi/6l68rXsPa9bSKULWTDhxWe2i4FywsaA/KJNjr9rhZwwaDOTMPLf9ig9xfPodEErHbHViAQ='
+  - secure: ! 'Q6ekpFwla7jO90sUw9HfMmEFWZMiXrT0un9K1WVvQcjQZzIn6mERl83askUId4f04l0qxydlvMcyHLG+PwEoOd7I8V1Q5lHPwqDEtSIuco8DRj+4O0CFV1OYYQkoOOu1fmNxrYCUcQrhuCmaY12ZdxDjvbZ87d1gpJzlo9B2k98='
+  - secure: ! 'ff/A7s6DhaNoY/+y5tXLNB24WwgfJqyDQxio8sNIFalVlVrNunqy66dcG0YUMXlG48RYXuRwPYEOdi/KG2SBeQsOk2vGM8EU50JWi4vSHN04WqSFie5i5ygi48Kc013J0/xQQ/8PpeNen1QO6/gnGimYRqhSmCkDRmmcgTDRZrs='
+  - secure: ! 'hdbmy7kMBp9ljTKwa4ToyGC5vDJ16yV+WV3Glv04ckcln9m5dsRzQPtvS9aenQMLRhIrHip9hlZwxK+UbfUhy+ZVJYR3zMruq1yJaCBWlPvDs5+bJBVT/7046WxPdF4kFeHdrrwLnEELkDCLuboKZR7Jfb5+cWGmghm/2SEMNzU='
+  - secure: ! 'QIw+ZTyyDwtolAIKIZhEq8VZ3+NNph5WaUABOJM4Jsx5y7Si6v7bIZYKhhli/wEwAITm0vhQydSh7+BMJBIxNMzZWXTEgv9X/5dKHDlGh0Z1gFfRbIfZbzi+uwRwu04BrI1mf1aG3F2Li34RdnvSz88zI/eCf2XNhkG0t82GG+c='
+  - secure: ! 'RsF1+S2z3v6zP0dyUsDx4pjhmsQ1Rqzw+pEpMBuGX//CANVeo+YB1fuJQs2dFFy9l5yJbU6Py9wxsrtHpPQZpkOzN9NOswJdk3i7fuo+eMdPuuOYRSiNgg4pqtC0ut04zDzs6mwSsix8gLeFGpg2e/Ejrlj3sETnKHmxGMCcXQM='
+  - secure: ! 'KVJ29HGQNnGDFCep+u2Kt0PL7wwNgHHCCoKyw4a8FZGCGPR6eh8alQawuSBxCa3XXlY/wj1FxiGOwfGeWIZ/MVwPUFw8WtfVia5yWBG7IQUrYYDTjfDIvKjQ597COlWchYQzZ0gl06r7k0rZosLucjgQrhZARqbP3vXt2g1vFvM='
+  - secure: ! 'd64vvVv3NjBmFHcMFjO0n8jjmXexI0E1JH8GYF5jDwF+RVmqhO13EuZXGj2PooxcyFhG+44bljb8nH71uuVgMeitnXiGflMFhwOLi1GypZi8RjTiYP+EstZapUWlNXHd8JhVdZOk+1EJcCvUjXC0dqFDPFjXFY6cAEx+RFKKBRc='
+  - secure: ! 'IxxzvSV76NhM7m6CsJuSjecEx87b87MJExlV29HQfNuS3vp8RzyKWgNkg6aEIqiH0T2EvfgE7DXoxKIlIe05M1w84cbIt2cIKx6d6FbOOe7cAhFy6yHFzccRrUFYXa4ReYp+u0hbi39SsJ3UNtNrHGpTDnCZ92PQXNC2/btv8lQ='
+  - secure: ! 'hBHzxyxOqrTACJHiNUMZkQ9PoiXDzUVm3PCnAr9x9GOinfEPcsC3+1sBE/8B0lK6zNKCKi6Fznf6iAYX9ABsV2IrsqImXO0yXh/n7FUo+sTv29bSzJacL8+XdFR1HL37oBc+UhzlIPW3F9X4A2GG83fdpryC6re5Wt9gqtG0/E0='
+  - secure: ! 'HKrNIoyx8N0RpikwkK6/BQbG04SX77HfTZMVTzNjyU0YuqIPathsxQz5x1vvRBkI2mK+A0onqz2O1HMV6m9jy/EaArJImB0snUqKhV6vL1kQtQPMht0qfZXnFBdm9uHlwLIsxe0earv9mrg5RR6QjbA7tuiBxRDjiZ27UMRhW+Q='
+  - secure: ! 'SxJtbD689SFUKrDUWnLCLnIBZjuHOMUctOUhABtBkf3tKwJ4ZG8pfS5T8/u24yF0hzbWD0nke4v9SeTo4jeVBpJdNt73RVDcmG/DTNQrBFCtkgiQEbWim1YRwEq43OF1qSycXSoWCqRgoOVloNLja701hm3+HVd7OPkEoNgP5+M='
+  - secure: ! 'hg+cGS/2Iu4N4KYMstxzZdJBMaEf0GrIM9MVCLUkiYy6gH7mCsqPM6ti+8OyawybmQHMFNRtUenHqCh/afsEgt18O2kW09VyegOAXunwpRFq82s7UUuug3wbrREQy1h4NdDQHZZmz0Cc3a9e0kMh5fDbkCXSNzx/5KlKKfly018='
+  - secure: ! 'TRjq/2CkeS08tJgzRXFp7DUjm8scVh8zwmg898qw7BFRM6ui0xiUGl2NDUtQKAcHiZ8y6mxzHLajxDAXFa+B9KG9mBq7SYanueXc53a4fJMfJFTPiNHI6NsfHcB9aefRGRNvCnTJA7GOrRyCLqZwXPb9oeyecN6Vmqe0iSeqf4Y='
+  - secure: ! 'hhRp+cMNH/WpiOTEnReUn7XQLG0rI2dAXGiQA2fbUtg8pjPc/bHkRUAOAtu0mCHKlq8ET0eJa6oKa+jr3O70YUSz5lvsM9FivGw0tFM2qwb+ejyPmvLoUxzZtIBEuD7b0GF592wf/O4erywAieF41beEnPl4qioA3NSY6lUv0VU='
+  - secure: ! 'QOqgy+gLffMGQc/IKm5M+qOvGD3IxnIJvsVU0R+/2Am/y39+TWvSPArGdDbd3+Czgmtfck7mii3RmGYsZ92AgFFsOTZSFbfvThrsEJJS6mzsAryFJgM4dTRnm3ZItYLqHGHGLOseIlBG75C43h069vOp0bxO2JkLqDZEXBYGJvE='
+  - secure: ! 'jZrJg4AoACKst1DPBFIqKgoAh+nagMaNgDDQ3VP8yaKlqgRn7Wbuymw56WZd9QLpZhGznNMgtX4hwwy+zKoMQE1OakOe0gcGIx6d8DAVuuwjWU8x7v8M0MqfaJr/RevtMjwSDCRdlkm833sDazPD908KWOXnzN9QgJ4atXV/Sec='
+  - secure: ! 'ennKwSwiVtfOwHAJOSJonVGRewO6HtCDK+5ErcS8pyf4b9vj3u7ZGxjptr9v+4Qxz157laWfM5cRDqoFoa2FbLNyyjB6iYD74I2qbBXhvs1KKz0twIFaC/kn3iAymzBkfftwKFHYIVU514sMbbV5/49vbHCNaG2DcJHiYhBzSV8='

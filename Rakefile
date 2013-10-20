@@ -12,7 +12,8 @@ rsync_args     = ""  # Any extra arguments to pass to rsync
 deploy_default = "push"
 
 # This will be configured for you when you run config_deploy
-deploy_branch  = "gh-pages"
+deploy_branch  = "master"
+deploy_remote  = "adrienbrault.net"
 
 ## -- Misc Configs -- ##
 
@@ -256,13 +257,14 @@ multitask :push do
   puts "\n## Copying #{public_dir} to #{deploy_dir}"
   cp_r "#{public_dir}/.", deploy_dir
   cd "#{deploy_dir}" do
+    system "cp ../.htaccess ."
     system "git add -A"
     puts "\n## Commiting: Site updated at #{Time.now.utc}"
     message = "Site updated at #{Time.now.utc}"
     system "git commit -m \"#{message}\""
     puts "\n## Pushing generated #{deploy_dir} website"
-    system "git push origin #{deploy_branch} --force --quiet"
-    puts "\n## Github Pages deploy complete"
+    system "git push #{deploy_remote} #{deploy_branch} --force"
+    puts "\n## Push deploy complete"
   end
 end
 
