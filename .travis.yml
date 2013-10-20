@@ -11,6 +11,14 @@ install:
 script:
     - jekyll build
 
+    - echo "yes" | sudo add-apt-repository ppa:avsm/ppa-testing
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq ocaml ocaml-native-compilers camlp4-extra opam
+    - export OPAMYES=1
+    - opam init
+    - opam install travis-senv
+    - eval `opam config env`
+
     - travis-senv decrypt > id_rsa_deploy
     - mv id_rsa_deploy ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
