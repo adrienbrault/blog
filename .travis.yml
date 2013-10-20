@@ -9,6 +9,8 @@ before_script:
     - git config --global user.email "adrien.brault@gmail.com"
     - git config --global user.name "Adrien Brault"
 
+    - rm -rf _deploy
+    - mkdir _deploy
     - cd _deploy
     - git init
     - echo 'Initial Commit' > index.html
