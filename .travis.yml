@@ -9,6 +9,8 @@ before_script:
     - git config --global user.email "adrien.brault@gmail.com"
     - git config --global user.name "Adrien Brault"
 
+    - echo "adrienbrault.net ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9td8PBIduYNvEHDDFSBdhZQ+hDbyFnV+jhKcwnMXtix6Ms90HIEv2KSKjwVZW6xt6zptOqgF+gTMdrL2I4YWVm0uJvZ9dEdIuFKQf3AZc9ZLrj+MDEvueWnw8PcEIdB1eHkkwBIrFZIyD9ji8KEmT9XLRQyYD6W5fjo1iwdConfKg2rVuyGPDOGsSvBkixPsN8F2+je8mXaTLPBac8YQDRGl2m1JBeiKMhlgAfggEW1e1KGbOtom5/2CubJfNoe8QYYOi+1OJ1atkr0GY315jIhrPd0Zq0m2cPYerRuzIRFQAYuuKaLYvYSnn3+wTy+pNi/U/bHKxeNsAWnQ5isvL" >> ~/.ssh/known_hosts
+
     - rm -rf _deploy
     - mkdir _deploy
     - cd _deploy
