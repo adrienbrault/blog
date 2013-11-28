@@ -35,7 +35,7 @@ script:
     - git init
     - git add .
     - git commit -m "Jekyll deploy"
-    - git remote add adrienbrault.net git@adrienbrault.net:blog
+    - git remote add adrienbrault.net dokku@adrienbrault.net:blog
     - git push adrienbrault.net master --force
 env:
     global:
